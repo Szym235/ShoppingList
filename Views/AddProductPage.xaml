@@ -3,10 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShoppingList.Views.AddProductPage"
              Title="AddProductPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout HorizontalOptions="Center">
+        
+            <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="Name" FontSize="Large"></Label>
+            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding NewName}" WidthRequest="200" FontSize="Large" x:Name="nameEntry"></Entry>
+            <Label Grid.Row="1" Grid.Column="0" Text="Quantity" FontSize="Large"></Label>
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding NewQuantity}" FontSize="Large" x:Name="quantityEntry" ></Entry>
+            <Label Grid.Row="2" Grid.Column="0" Text="Unit" FontSize="Large"></Label>
+            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding NewUnit}" FontSize="Large" x:Name="unitEntry"></Entry>
+        </Grid>
+        <Button FontSize="Large" Text="Add" Command="{Binding AddProductCommand}"></Button>
+        
     </VerticalStackLayout>
 </ContentPage>
