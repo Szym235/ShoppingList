@@ -22,9 +22,16 @@ public partial class ProductView : ContentView
         get => (bool)GetValue(IsBoughtProperty);
         set {
             SetValue(IsBoughtProperty, value);
-            if (value) BackgroundColor = Color.FromRgb(155, 155, 155);
-            else BackgroundColor = Color.FromRgb(255, 255, 255);
-
+            if (value)
+            {
+                BackgroundColor = Color.FromRgb(0, 0, 0);
+                TextColor = Color.FromRgb(255, 255, 255);
+            }
+            else
+            {
+                BackgroundColor = Color.FromRgb(255, 255, 255);
+                TextColor = Color.FromRgb(0, 0, 0);
+            }
         }
     }
 
@@ -40,6 +47,13 @@ public partial class ProductView : ContentView
     {
         get => (Color)GetValue(BackgroundColorProperty);
         set => SetValue(BackgroundColorProperty, value);
+    }
+
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ProductView), Color.FromRgb(0, 0, 0));
+    public Color TextColor
+    {
+        get => (Color)GetValue(TextColorProperty);
+        set => SetValue(TextColorProperty, value);
     }
 
     public ProductView()

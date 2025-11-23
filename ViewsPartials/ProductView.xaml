@@ -21,17 +21,20 @@
                   HorizontalOptions="Center"
                   Margin="20, 0, 0, 0"/>
         <Label Text="{Binding Name, FallbackValue='Name empty', Source={x:Reference this}}" 
+               TextColor="{Binding TextColor, Source={x:Reference this}}"
                Grid.Column="1"
                FontSize="20"
                HorizontalOptions="Center"
                Margin="20"/>
         <Button Text="-" Grid.Column="2" HeightRequest="20"/>
         <Entry Text="{Binding Quantity, FallbackValue='1', Source={x:Reference this}}" 
+                         TextColor="{Binding TextColor, Source={x:Reference this}}"
                Grid.Column="3"
                FontSize="20"
                HorizontalOptions="End"
                HeightRequest="20"/>
         <Label Text="{Binding Unit, FallbackValue='Unit', Source={x:Reference this}}" 
+                         TextColor="{Binding TextColor, Source={x:Reference this}}"
                Grid.Column="4"
                FontSize="20"
                HorizontalOptions="Start"
