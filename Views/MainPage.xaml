@@ -3,19 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ShoppingList.Views.MainPage"
     xmlns:models="clr-namespace:ShoppingList.Models"
-    xmlns:controls="clr-namespace:ShoppingList.ViewsPartials"
+    xmlns:viewPartials="clr-namespace:ShoppingList.ViewsPartials"
+    xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
     BackgroundColor="Black">
 
     <VerticalStackLayout>
         <ListView ItemsSource="{Binding Products}">
             <ListView.ItemTemplate>
-                
+
                 <DataTemplate x:DataType="models:Product">
                     <ViewCell>
-                        <controls:ProductView Name="{Binding Name}"
-                                              Quantity="{Binding Quantity}"
-                                              Unit="{Binding Unit}"
-                                              IsBought="{Binding IsBought}"/>
+                        <viewPartials:ProductView/>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

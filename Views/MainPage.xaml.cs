@@ -1,4 +1,6 @@
 ﻿using ShoppingList.Models;
+using System.Diagnostics;
+using ShoppingList.ViewModels;
 
 namespace ShoppingList.Views
 {
@@ -8,7 +10,10 @@ namespace ShoppingList.Views
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new AllProducts();
+            Debug.WriteLine("-------------------------------------");
+            BindingContext = AllProducts.Instance;
+            Debug.WriteLine("-------------------------------------");
+            Debug.WriteLine(BindingContext);
         }
     }
 
