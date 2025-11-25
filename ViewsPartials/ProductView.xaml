@@ -6,6 +6,20 @@
              x:DataType="models:Product"
              x:Name="this">
     <Grid BackgroundColor="White">
+        <Grid.Triggers>
+            <DataTrigger TargetType="Grid"
+                     Binding="{Binding IsBought}"
+                     Value="True">
+                <Setter Property="BackgroundColor"
+                        Value="DarkGray"/>
+            </DataTrigger>
+            <DataTrigger TargetType="Grid"
+                     Binding="{Binding IsBought}"
+                     Value="False">
+                <Setter Property="BackgroundColor"
+                        Value="White"/>
+            </DataTrigger>
+        </Grid.Triggers>
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -23,11 +37,13 @@
                   HorizontalOptions="Center"
                   Margin="20, 0, 0, 0"/>
         <Label Text="{Binding Name}" 
+               Style="{StaticResource ProductLabelTrigger}"
                TextColor="Black"
                Grid.Column="1"
                FontSize="20"
                HorizontalOptions="Center"
-               Margin="20"/>
+               Margin="20">
+        </Label>
         <Button Text="-"
                 Grid.Column="2"
                 HeightRequest="20"
@@ -52,7 +68,7 @@
         <Button Text="X"
                 Grid.Column="6"
                 HeightRequest="20"
-                Command="{Binding Path=BindingContext.RemoveProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                Command="{Binding BindingContext.RemoveProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                 CommandParameter="{Binding}"/>
     </Grid>
 </ContentView>

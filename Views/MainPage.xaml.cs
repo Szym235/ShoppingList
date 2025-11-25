@@ -10,11 +10,8 @@ namespace ShoppingList.Views
         public MainPage()
         {
             InitializeComponent();
-            Debug.WriteLine("-------------------------------------");
             BindingContext = AllProducts.Instance;
-            Debug.WriteLine("-------------------------------------");
-            Debug.WriteLine(BindingContext);
-        }
+        } 
     }
 
 }

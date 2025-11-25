@@ -18,6 +18,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Text="Save" Command="{Binding SaveProductsCommand}"></Button>
     </VerticalStackLayout>
 
 </ContentPage>

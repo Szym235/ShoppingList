@@ -14,23 +14,27 @@ namespace ShoppingList.Models
     public partial class Product : ObservableObject
     {
         [ObservableProperty]
-        private string name;
-
-        [ObservableProperty]
-        private string unit;
-
-        [ObservableProperty]
         private Boolean isBought;
+
+        [ObservableProperty]
+        private string name;
 
         [ObservableProperty]
         private double quantity;
 
-        public Product(string name, string unit, Boolean isBought, double quantity)
+        [ObservableProperty]
+        private string unit;
+
+
+
+
+
+        public Product(Boolean isBought, string name, double quantity, string unit )
         {
-            this.name = name;
-            this.unit = unit;
             this.isBought = isBought;
+            this.name = name;
             this.quantity = quantity;
+            this.unit = unit;
         }
 
         [RelayCommand]

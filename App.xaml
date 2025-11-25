@@ -5,6 +5,22 @@
              x:Class="ShoppingList.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="ProductLabelTrigger" TargetType="Label">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsBought}"
+                     TargetType="Label"
+                     Value="True">
+                        <Setter Property="TextColor"
+                        Value="LightGray"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsBought}"
+                     TargetType="Label"
+                     Value="False">
+                        <Setter Property="TextColor"
+                        Value="Black"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
