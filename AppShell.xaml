@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:ShoppingList"
     xmlns:views="clr-namespace:ShoppingList.Views"
     Shell.FlyoutBehavior="Flyout"
-    Title="Shopping List">
+    Title="Shopping List"
+    BackgroundColor="DarkOrange">
 
     <ShellContent
-        Title="Shopping list"
         ContentTemplate="{DataTemplate views:MainPage}"
         Route="ShoppingList"/>
 

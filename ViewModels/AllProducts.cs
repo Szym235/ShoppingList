@@ -24,8 +24,9 @@ namespace ShoppingList.ViewModels
         private ObservableCollection<Product> products = new();
         AllProducts()
         {
-            LoadProducts();
             saveFilePath = Path.Combine(FileSystem.AppDataDirectory, "ProductsSaveFile.xml");
+            LoadProducts();
+            Debug.WriteLine(saveFilePath);
         }
 
         [RelayCommand]
@@ -62,24 +63,31 @@ namespace ShoppingList.ViewModels
         private void LoadProducts()
         {
             XmlDocument document = new XmlDocument();
+
             try
             {
                 document.Load(saveFilePath);
                 XmlElement root = document.DocumentElement;
                 foreach (XmlNode node in root.ChildNodes)
                 {
-                    string name = getAttributeIfExists(node, "Name", "");
-                    counter.ColorName = getAttributeIfExists(node, "Color", "White");
-                    counter.Value = int.Parse(node.InnerText);
-                    Debug.WriteLine("Added " + counter.Name + " with value " + counter.Value);
-                    Counters.Add(counter);
+                    Boolean isBought;
+                    Boolean.TryParse(getAttributeIfExists(node, "IsBought", "false"), out isBought);
+                    string name = getAttributeIfExists(node, "Name", "Name");
+                    int quantity = int.Parse(getAttributeIfExists(node, "Quantity", "1"));
+                    string unit = getAttributeIfExists(node, "Unit", "units");
+                    Products.Add(new Product(isBought, name, quantity, unit));
                 }
             }
             catch
             {
-                addCounter();
+                Debug.WriteLine("Error while loading");
             }
-            Debug.WriteLine("Command binded");
+}
+
+        private string getAttributeIfExists(XmlNode node, String name, String defaultValue)
+        {
+            if (node.Attributes[name] != null) return node.Attributes[name].Value;
+            else return defaultValue;
         }
     }
 }

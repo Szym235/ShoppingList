@@ -4,8 +4,7 @@
              x:Class="ShoppingList.Views.AddProductPage"
              Title="AddProductPage">
     <VerticalStackLayout HorizontalOptions="Center">
-        
-            <Grid >
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
