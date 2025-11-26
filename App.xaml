@@ -5,19 +5,19 @@
              x:Class="ShoppingList.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Style x:Key="ProductLabelTrigger" TargetType="Label">
+            <Style x:Key="ProductOpacityTrigger" TargetType="VisualElement">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsBought}"
-                     TargetType="Label"
+                     TargetType="VisualElement"
                      Value="True">
-                        <Setter Property="TextColor"
-                        Value="LightGray"/>
+                        <Setter Property="Opacity"
+                        Value="0.3"/>
                     </DataTrigger>
                     <DataTrigger Binding="{Binding IsBought}"
-                     TargetType="Label"
+                     TargetType="VisualElement"
                      Value="False">
-                        <Setter Property="TextColor"
-                        Value="Black"/>
+                        <Setter Property="Opacity"
+                        Value="1"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShoppingList.ViewsPartials.CategoryView"
+             xmlns:models="clr-namespace:ShoppingList.Models"
+             xmlns:viewPartials="clr-namespace:ShoppingList.ViewsPartials"
+             x:DataType="models:Category">
+    <VerticalStackLayout>
+        <Border>
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
+                    <CheckBox IsChecked="{Binding IsVisible}"
+                              Margin="10, 0, 10, 0"/>
+                    <Label Text="{Binding Name}"
+                       FontSize="20"
+                       VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <ListView ItemsSource="{Binding Products}" >
+                    <ListView.Triggers>
+                        <DataTrigger TargetType="ListView"
+                         Binding="{Binding BindingContext.IsVisible, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+                         Value="False">
+                            <Setter Property="IsVisible"
+                            Value="Hidden"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="ListView"      
+                         Binding="{Binding BindingContext.IsVisible, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+                         Value="True">
+                            <Setter Property="IsVisible"
+                            Value="Visible"/>
+                        </DataTrigger>
+                    </ListView.Triggers>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Product">
+                            <ViewCell>
+                                <viewPartials:ProductView/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

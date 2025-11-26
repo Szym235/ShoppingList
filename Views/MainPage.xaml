@@ -5,30 +5,14 @@
     xmlns:models="clr-namespace:ShoppingList.Models"
     xmlns:viewPartials="clr-namespace:ShoppingList.ViewsPartials"
     xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
-    BackgroundColor="White">
-
-    <VerticalStackLayout>
-        <Label Text="Your list:"
-               TextColor="Black"
-               FontSize="20"
-               Margin="5, 0, 0, 0"></Label>
-        <ListView ItemsSource="{Binding Products}"
-                  Margin="5, 20, 5, 20">
-            <ListView.ItemTemplate>
-
-                <DataTemplate x:DataType="models:Product">
-                    <ViewCell>
-                        <viewPartials:ProductView/>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Text="Save"
-                Command="{Binding SaveProductsCommand}"
-                WidthRequest="100"
-                BackgroundColor="DarkOrange"
-                HorizontalOptions="Start"
-                Margin="5, 0, 0, 0"></Button>
-    </VerticalStackLayout>
+    BackgroundColor="White"
+    x:DataType="viewModels:AllProducts"
+    Title="Shopping list">
+    <ScrollView>
+        <VerticalStackLayout>
+            <viewPartials:ExportOptionsView/>
+            <viewPartials:CategoriesView  Padding="5"/>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShoppingList.Views.ListForShopPage"
+             xmlns:viewPartials="clr-namespace:ShoppingList.ViewsPartials"
+             xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
+             xmlns:models="clr-namespace:ShoppingList.Models"
+             Title="List for shop"
+             x:DataType="viewModels:AllProducts">
+    <ScrollView>
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Filter by shop:"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       Margin="5"/>
+                <Picker Grid.Row="3" 
+                        Grid.Column="1" 
+                        ItemsSource="{Binding Shops}"
+                        SelectedItem="{Binding FilteredShopFromPicker}"
+                        Margin="5">
+                </Picker>
+            </HorizontalStackLayout>
+            <ListView ItemsSource="{Binding Products}"
+                      Margin="5">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <ViewCell>
+                            <viewPartials:ProductView>
+                                <viewPartials:ProductView.Triggers>
+                                    <DataTrigger TargetType="viewPartials:ProductView"
+                                        Binding="{Binding IsBought}"
+                                        Value="True">
+                                        <Setter Property="IsVisible"
+                                           Value="Hidden"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="viewPartials:ProductView"
+                                        Binding="{Binding IsBought}"
+                                        Value="False">
+                                        <Setter Property="IsVisible"
+                                           Value="Visible"/>
+                                    </DataTrigger>
+                                </viewPartials:ProductView.Triggers>
+                            </viewPartials:ProductView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

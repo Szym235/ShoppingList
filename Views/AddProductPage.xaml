@@ -2,26 +2,136 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShoppingList.Views.AddProductPage"
-             Title="AddProductPage">
-    <VerticalStackLayout HorizontalOptions="Center">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="Name" FontSize="Large"></Label>
-            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding NewName}" WidthRequest="200" FontSize="Large" x:Name="nameEntry"></Entry>
-            <Label Grid.Row="1" Grid.Column="0" Text="Quantity" FontSize="Large"></Label>
-            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding NewQuantity}" FontSize="Large" x:Name="quantityEntry" ></Entry>
-            <Label Grid.Row="2" Grid.Column="0" Text="Unit" FontSize="Large"></Label>
-            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding NewUnit}" FontSize="Large" x:Name="unitEntry"></Entry>
-        </Grid>
-        <Button FontSize="Large" Text="Add" Command="{Binding AddProductCommand}"></Button>
-        
+             xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
+             xmlns:models="clr-namespace:ShoppingList.Models"
+             Title="Add products and categories"
+             x:DataType="viewModels:AllProducts"
+             xmlns:viewPartials="clr-namespace:ShoppingList.ViewsPartials">
+    <VerticalStackLayout>
+        <HorizontalStackLayout Padding="20">
+        <VerticalStackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    </Grid.RowDefinitions >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Row="0" 
+                       Grid.Column="0" 
+                       Text="Name" 
+                       FontSize="20" 
+                       Margin="10"/>
+                <Entry Grid.Row="0" 
+                       Grid.Column="1" 
+                       Text="{Binding NewNameFromEntry}" 
+                       WidthRequest="200" 
+                       FontSize="20" 
+                       x:Name="nameEntry" 
+                       Margin="10"/>
+
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Text="Quantity"
+                       FontSize="20" 
+                       Margin="10"/>
+                <Entry Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding NewQuantityFromEntry}"
+                       FontSize="20" 
+                       x:Name="quantityEntry"
+                       Margin="10"/>
+
+                <Label Grid.Row="2"
+                       Grid.Column="0" 
+                       Text="Unit" 
+                       FontSize="20" 
+                       Margin="10"/>
+                <Entry Grid.Row="2"
+                       Grid.Column="1" 
+                       Text="{Binding NewUnitFromEntry}" 
+                       FontSize="20" 
+                       x:Name="unitEntry" 
+                       Margin="10"/>
+
+                <Label Grid.Row="3" 
+                   Grid.Column="0" 
+                   Text="Category" 
+                   FontSize="20" 
+                   Margin="10"/>
+                <Picker Grid.Row="3" 
+                    Grid.Column="1" 
+                    ItemsSource="{Binding Categories}"
+                    SelectedItem="{Binding NewCategoryFromPicker}"
+                    ItemDisplayBinding="{Binding Name}"
+                    Margin="10">
+                </Picker>
+
+                <Label Grid.Row="4" 
+                       Grid.Column="0" 
+                       Text="Shop" 
+                       FontSize="20" 
+                       Margin="10"/>
+                <Picker Grid.Row="4" 
+                        Grid.Column="1" 
+                        ItemsSource="{Binding Shops}"
+                        SelectedItem="{Binding NewShopFromPicker}"
+                        Margin="10">
+                </Picker>
+
+                <Label Grid.Row="5" 
+                       Grid.Column="0" 
+                       Text="Is optional" 
+                       FontSize="20" 
+                       Margin="10, 10, 10, 10"/>
+                    <CheckBox Grid.Row="5" 
+                          Grid.Column="1" 
+                          IsChecked="{Binding NewIsOptionalFromCheckBox}" 
+                          Margin="10"/>
+                </Grid>
+                <Button                        
+                    FontSize="20" 
+                    Text="Add product"
+                    Command="{Binding AddProductCommand}"
+                    BackgroundColor="Orange"
+                    Margin="10"></Button>
+            
+        </VerticalStackLayout>
+            <VerticalStackLayout Margin="50, 0, 0, 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" 
+                       Grid.Column="0" 
+                       Text="New category name" 
+                       FontSize="20" 
+                       Margin="10"/>
+                    <Entry Grid.Row="0" 
+                       Grid.Column="1" 
+                       Text="{Binding NewCategoryFromEntry}" 
+                       FontSize="20" 
+                       Margin="10"
+                       WidthRequest="200" />
+                </Grid>
+                <Button FontSize="20" 
+                    Text="Add category"
+                    Command="{Binding AddCategoryCommand}"
+                    BackgroundColor="Orange"
+                    Margin="10"></Button>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

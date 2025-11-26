@@ -8,25 +8,12 @@
     <Border Stroke="LightGray"
             StrokeThickness="1">
         <Grid BackgroundColor="White">
-            <Grid.Triggers>
-                <DataTrigger TargetType="Grid"
-                         Binding="{Binding IsBought}"
-                         Value="True">
-                    <Setter Property="BackgroundColor"
-                            Value="DarkGray"/>
-                </DataTrigger>
-                <DataTrigger TargetType="Grid"
-                         Binding="{Binding IsBought}"
-                         Value="False">
-                    <Setter Property="BackgroundColor"
-                            Value="White"/>
-                </DataTrigger>
-            </Grid.Triggers>
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="50"/>
@@ -34,58 +21,105 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
+            <!--Checkbox to mark product as bought -->
             <CheckBox IsChecked="{Binding IsBought}"
+                      Style="{StaticResource ProductOpacityTrigger}"
                       Grid.Column="0"
                       HorizontalOptions="Start"
                       Margin="20, 0, 0, 0"
                       Color="Orange"/>
-            <Label Text="{Binding Name}" 
-                   Style="{StaticResource ProductLabelTrigger}"
-                   TextColor="Black"
+            
+            <!--Label visible if product is optional -->
+            <Label Text="(Optional)" 
+                   Style="{StaticResource ProductOpacityTrigger}"
+                   TextColor="DarkGray"
                    Grid.Column="1"
                    FontSize="20"
                    HorizontalOptions="Center"
+                   Margin="20">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label"
+                                 Binding="{Binding IsOptional}"
+                                 Value="False">
+                        <Setter Property="IsVisible"
+                                Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Label"
+                                 Binding="{Binding IsOptional}"
+                                 Value="True">
+                        <Setter Property="IsVisible"
+                                Value="True"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <!--Product name -->
+            <Label Text="{Binding Name}" 
+                   Style="{StaticResource ProductOpacityTrigger}"
+                   TextColor="Black"
+                   Grid.Column="2"
+                   FontSize="20"
+                   HorizontalOptions="Start"
                    Margin="20"/>
+
+            <!--Decrease quantity button -->
             <Button Text="-"
-                    Grid.Column="2"
+                    Grid.Column="3"
+                    Style="{StaticResource ProductOpacityTrigger}"
                     HeightRequest="20"
                     BackgroundColor="White"
                     BorderColor="Black"
                     WidthRequest="20"
                     BorderWidth="1"
                     HorizontalOptions="End"
-                    Command="{Binding DecrementQuantityCommand}"/>
+                    Command="{Binding DecrementQuantityCommand}"
+                    TextColor="Black"/>
+            
+            <!-- Quantity of product-->
             <Entry Text="{Binding Quantity}" 
-                   TextColor="Black"
-                   Grid.Column="3"
-                   FontSize="20"
-                   HorizontalOptions="End"
-                   HeightRequest="20"/>
-            <Label Text="{Binding Unit}" 
+                   Style="{StaticResource ProductOpacityTrigger}"
                    TextColor="Black"
                    Grid.Column="4"
                    FontSize="20"
+                   HorizontalOptions="End"
+                   HeightRequest="20">
+            </Entry>
+
+            <!--Product unit -->
+            <Label Text="{Binding Unit}" 
+                   Style="{StaticResource ProductOpacityTrigger}"
+                   TextColor="Black"
+                   Grid.Column="5"
+                   FontSize="20"
                    HorizontalOptions="Start"
                    Margin="0, 20, 0, 25"/>
+
+            <!--Increase quantity button -->
             <Button Text="+" 
-                    Grid.Column="5" 
+                    Style="{StaticResource ProductOpacityTrigger}"
+                    Grid.Column="6" 
                     HeightRequest="20"
                     HorizontalOptions="Start"
                     BackgroundColor="White"
                     BorderColor="Black"
                     BorderWidth="1"
                     Command="{Binding IncrementQuantityCommand}"
-                    WidthRequest="20"/>
+                    WidthRequest="20"
+                    TextColor="Black"/>
+
+            <!--Delete product button -->
             <Button Text="X"
-                    Grid.Column="6"
+                    Grid.Column="7"
+                    Style="{StaticResource ProductOpacityTrigger}"
                     HeightRequest="20"
                     Command="{Binding BindingContext.RemoveProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                     CommandParameter="{Binding}"
                     BackgroundColor="IndianRed"
                     BorderColor="Black"
                     BorderWidth="1"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="End"
+                    Margin="0, 0, 20, 0"/>
         </Grid>
     </Border>
 </ContentView>

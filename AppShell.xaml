@@ -10,12 +10,23 @@
     BackgroundColor="DarkOrange">
 
     <ShellContent
+        Title="Shopping list"
         ContentTemplate="{DataTemplate views:MainPage}"
         Route="ShoppingList"/>
 
     <ShellContent
-        Title="Add product"
+        Title="Add products and categories"
         ContentTemplate="{DataTemplate views:AddProductPage}"
         Route="AddProduct"/>
+
+    <ShellContent
+        Title="List for shop"
+        ContentTemplate="{DataTemplate views:ListForShopPage}"
+        Route="ListForShop"/>
+
+    <ShellContent
+        Title="Recipes"
+        ContentTemplate="{DataTemplate views:recipesPage}"
+        Route="recipes"/>
 
 </Shell>

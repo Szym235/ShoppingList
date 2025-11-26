@@ -11,7 +11,8 @@ namespace ShoppingList.Views
         {
             InitializeComponent();
             BindingContext = AllProducts.Instance;
-        } 
+        }
+
     }
 
 }
