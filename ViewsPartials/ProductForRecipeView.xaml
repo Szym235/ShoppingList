@@ -42,7 +42,8 @@
             </Label>
 
             <!--Product name -->
-            <Label Text="{Binding Name}" 
+            <Label 
+                   Text="{Binding Name}" 
                    TextColor="Black"
                    Grid.Column="1"
                    FontSize="20"

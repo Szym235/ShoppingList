@@ -19,6 +19,11 @@ namespace ShoppingList.ViewModels
             LoadRecipes();
         }
 
+        private void OnRecipesChanged(ObservableCollection<Recipe> oldValue, ObservableCollection<Recipe> newValue)
+        {
+            SaveRecipes();
+        }
+
         private void LoadRecipes()
         {
             if (!File.Exists(recipesSaveFilePath))

@@ -16,21 +16,54 @@ namespace ShoppingList.ViewModels
 
         [ObservableProperty]
         private Recipe recipeForCreation;
-
+        [ObservableProperty]
+        private Category newCategoryFromPicker;
+        [ObservableProperty]
+        private string newShopFromPicker;
+        [ObservableProperty]
+        private ObservableCollection<Category> categories;
+        [ObservableProperty]
+        private ObservableCollection<string> shops;
         RecipeCreator()
         {
             RecipeForCreation = new Recipe("New Recipe", new ObservableCollection<Category>());
+            Categories = AllProducts.Instance.Categories;
+            Shops = AllProducts.Instance.Shops;
         }
 
         [RelayCommand]
         private void AddProduct()
         {
-            string firstCategoryName = AllProducts.Instance.Categories[0].Name;
+            string firstCategoryName = NewCategoryFromPicker.Name;
             if (!Category.CheckIfCategoryExistsInCollection(RecipeForCreation.Categories, firstCategoryName))
             {
                 RecipeForCreation.Categories.Add(new Category(firstCategoryName));
             }
-            Category.FindCategoryByNameInCollection(RecipeForCreation.Categories, firstCategoryName).Products.Add(new Product(false, "", 1, "", "No shop specified", false));
+            Category.FindCategoryByNameInCollection(RecipeForCreation.Categories, firstCategoryName).Products.Add(new Product(false, "", 0, "", NewShopFromPicker, false));
+        }
+
+
+        [RelayCommand]
+        private void RemoveProduct(Product productForRemoval)
+        {
+            foreach (Category category in recipeForCreation.Categories)
+            {
+                foreach (Product product in category.Products)
+                {
+                    if (product == productForRemoval)
+                    {
+                        category.Products.Remove(product);
+                        break;
+                    }
+                }
+            }
+        }
+
+        [RelayCommand]
+        private void AddRecipe()
+        {
+            AllRecipes.Instance.Recipes.Add(RecipeForCreation);
+            RecipeForCreation = new Recipe("New Recipe", new ObservableCollection<Category>());
         }
     }
 }

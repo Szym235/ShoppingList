@@ -6,11 +6,14 @@
              xmlns:viewPartials="clr-namespace:ShoppingList.ViewsPartials"
              x:DataType="models:Category">
     <VerticalStackLayout>
+        <Label Text="{Binding Name}"
+                       FontSize="20"
+                       VerticalOptions="Center"/>
         <ListView ItemsSource="{Binding Products}" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Product">
                     <ViewCell>
-                        <viewPartials:ProductForRecipeView/>
+                        <viewPartials:ProductForRecipeCreatorView/>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

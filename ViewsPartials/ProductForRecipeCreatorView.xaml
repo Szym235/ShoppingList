@@ -12,6 +12,9 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -21,56 +24,67 @@
             <!--Label visible if product is optional -->
             <CheckBox IsChecked="{Binding IsOptional}"
                       Grid.Column="0"
-                      HorizontalOptions="Center"
+                      HorizontalOptions="End"
                       Margin="20, 0, 0, 0"
                       Color="Orange"/>
             <Label Text="(Optional)" 
                    TextColor="DarkGray"
-                   Grid.Column="0"
-                   FontSize="20"
-                   HorizontalOptions="Center"
-                   Margin="20">
-                <Label.Triggers>
-                    <DataTrigger TargetType="Label"
-                                 Binding="{Binding IsOptional}"
-                                 Value="False">
-                        <Setter Property="IsVisible"
-                                Value="False"/>
-                    </DataTrigger>
-                    <DataTrigger TargetType="Label"
-                                 Binding="{Binding IsOptional}"
-                                 Value="True">
-                        <Setter Property="IsVisible"
-                                Value="True"/>
-                    </DataTrigger>
-                </Label.Triggers>
-            </Label>
-
-            <!--Product name -->
-            <Entry Text="{Binding Name}" 
-                   TextColor="Black"
                    Grid.Column="1"
                    FontSize="20"
                    HorizontalOptions="Start"
                    Margin="20"/>
 
-            <!-- Quantity of product-->
-            <Entry  Text="{Binding Quantity}" 
+            <!--Product name -->
+            <Entry Placeholder="Name"
+                   Text="{Binding Name}" 
                    TextColor="Black"
                    Grid.Column="2"
                    FontSize="20"
-                   HorizontalOptions="End"
-                   VerticalOptions="Center"
-                   HeightRequest="20">
-            </Entry>
+                   WidthRequest="200"
+                   HorizontalOptions="Start"
+                   Margin="20"/>
 
-            <!--Product unit -->
-            <Entry Text="{Binding Unit}" 
+            <!-- Quantity of product-->
+            <Entry Placeholder="Quantity"
+                   Text="{Binding Quantity}" 
                    TextColor="Black"
                    Grid.Column="3"
                    FontSize="20"
+                   HorizontalOptions="End"
                    VerticalOptions="Center"
-                   HorizontalOptions="Start"/>
+                   HeightRequest="20"
+                   WidthRequest="100">
+            </Entry>
+
+            <!--Product unit -->
+            <Entry Placeholder="Unit"
+                   Text="{Binding Unit}" 
+                   TextColor="Black"
+                   Grid.Column="4"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   WidthRequest="100"/>
+            
+            <!--Shop label-->
+            <Label Text="{Binding Shop}" 
+                   TextColor="Black"
+                   Grid.Column="5"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   WidthRequest="100"/>
+
+            <!--Delete product button -->
+            <Button Text="X"
+                    Grid.Column="6"
+                    HeightRequest="20"
+                    Command="{Binding BindingContext.RemoveProductCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                    CommandParameter="{Binding}"
+                    BackgroundColor="IndianRed"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    HorizontalOptions="End"
+                    Margin="0, 0, 20, 0"/>
         </Grid>
     </Border>
 </ContentView>

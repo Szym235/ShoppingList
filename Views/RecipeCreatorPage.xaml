@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShoppingList.Views.RecipeCreatorPage"
-             Title="RecipeCreatorPage"
+             Title="Recipe creator"
              xmlns:viewModels="clr-namespace:ShoppingList.ViewModels"
              xmlns:viewPartials="clr-namespace:ShoppingList.ViewsPartials"
              xmlns:models="clr-namespace:ShoppingList.Models"
@@ -10,17 +10,41 @@
     <VerticalStackLayout>
         <Entry Text="{Binding RecipeForCreation.Name}"
                FontSize="20"
-               Margin="10"/>
-        <Button Text="Add product"
-                Command="{Binding AddProductCommand}"/>
+               Margin="5"
+               WidthRequest="200"
+               HorizontalOptions="Start"/>
+        <Button Text="Add to recipes"
+                Command="{Binding AddRecipeCommand}"
+                WidthRequest="150"
+                HorizontalOptions="End"
+                Margin="5"/>
         <ListView ItemsSource="{Binding RecipeForCreation.Categories}">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:Product">
+                <DataTemplate x:DataType="models:Category">
                     <ViewCell>
-                        <viewPartials:ProductForRecipeCreatorView/>
+                        <viewPartials:CategoryForRecipeCreatorView/>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <HorizontalStackLayout>
+            <Button Text="Add product"
+                    Command="{Binding AddProductCommand}"
+                    WidthRequest="150"
+                    HorizontalOptions="Start"
+                    Margin="5"/>
+            <Picker WidthRequest="200"
+                    HeightRequest="20"
+                    ItemsSource="{Binding Categories}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding NewCategoryFromPicker}"
+                    Margin="10">
+            </Picker>
+            <Picker WidthRequest="200"
+                    ItemsSource="{Binding Shops}"
+                    SelectedItem="{Binding NewShopFromPicker}"
+                    Margin="10">
+            </Picker>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
