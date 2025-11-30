@@ -214,6 +214,8 @@ namespace ShoppingList.ViewModels
             if (!File.Exists(path))
             {
                 Categories.Add(new Category("Miscellanous"));
+                Categories.Add(new Category("Dairy"));
+                Categories.Add(new Category("Meat"));
                 SaveProducts();
             }
             else

@@ -8,6 +8,7 @@
              xmlns:models="clr-namespace:ShoppingList.Models"
              x:DataType="viewModels:RecipeCreator">
     <VerticalStackLayout>
+        <HorizontalStackLayout>
         <Entry Text="{Binding RecipeForCreation.Name}"
                FontSize="20"
                Margin="5"
@@ -18,6 +19,7 @@
                 WidthRequest="150"
                 HorizontalOptions="End"
                 Margin="5"/>
+        </HorizontalStackLayout>
         <ListView ItemsSource="{Binding RecipeForCreation.Categories}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Category">
