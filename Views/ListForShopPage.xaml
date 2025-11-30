@@ -14,12 +14,16 @@
                        FontSize="20"
                        VerticalOptions="Center"
                        Margin="5"/>
-                <Picker Grid.Row="3" 
-                        Grid.Column="1" 
-                        ItemsSource="{Binding Shops}"
+                <Picker ItemsSource="{Binding Shops}"
                         SelectedItem="{Binding FilteredShopFromPicker}"
-                        Margin="5">
-                </Picker>
+                        Margin="5"/>
+                <Label Text="Sort by:"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       Margin="20, 5, 0, 0"/>
+                <Picker ItemsSource="{Binding SortOptions}"
+                        SelectedItem="{Binding SortByFromPicker}"
+                        Margin="5"/>
             </HorizontalStackLayout>
             <ListView ItemsSource="{Binding Products}"
                       Margin="5">

@@ -2,9 +2,9 @@ using ShoppingList.ViewModels;
 
 namespace ShoppingList.Views;
 
-public partial class recipesPage : ContentPage
+public partial class RecipesPage : ContentPage
 {
-	public recipesPage()
+	public RecipesPage()
 	{
 		InitializeComponent();
 		BindingContext = AllRecipes.Instance;

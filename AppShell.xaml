@@ -26,7 +26,13 @@
 
     <ShellContent
         Title="Recipes"
-        ContentTemplate="{DataTemplate views:recipesPage}"
+        ContentTemplate="{DataTemplate views:RecipesPage}"
         Route="recipes"/>
+
+    <ShellContent
+        Title="Recipe creator"
+        ContentTemplate="{DataTemplate views:RecipeCreatorPage}"
+        Route="recipeCreator"/>
+
 
 </Shell>

@@ -34,6 +34,13 @@ namespace ShoppingList.ViewModels
         private string filteredShopFromPicker;
         [ObservableProperty]
         private Boolean newIsOptionalFromCheckBox;
+        [ObservableProperty]
+        private ObservableCollection<String> sortOptions = new ObservableCollection<string>()
+        {
+            "Category", "Name", "Quantity",
+        };
+        [ObservableProperty]
+        private string sortByFromPicker;
 
         [ObservableProperty]
         private ObservableCollection<Product> products = new();
@@ -50,6 +57,7 @@ namespace ShoppingList.ViewModels
             LoadProducts(productsSaveFilePath);
             NewShopFromPicker = Shops[0];
             FilteredShopFromPicker = Shops[0];
+            SortByFromPicker = SortOptions[0];
         }
 
         private void Products_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -62,6 +70,10 @@ namespace ShoppingList.ViewModels
             SaveProducts();
         }
         partial void OnFilteredShopFromPickerChanged(string? oldValue, string newValue)
+        {
+            UpdateProducts();
+        }
+        partial void OnSortByFromPickerChanged(string? oldValue, string newValue)
         {
             UpdateProducts();
         }
@@ -100,6 +112,12 @@ namespace ShoppingList.ViewModels
             Categories.Add(new Category(NewCategoryFromEntry));
             Categories.Last().Products.CollectionChanged += Products_CollectionChanged;
             NewCategoryFromEntry = string.Empty;
+            SortCategories();
+        }
+
+        private void SortCategories()
+        {
+            Categories = new ObservableCollection<Category>(Categories.OrderBy(category => category.Name));
         }
 
         [RelayCommand]
@@ -177,6 +195,17 @@ namespace ShoppingList.ViewModels
                     if (FilteredShopFromPicker == "No shop specified" || product.Shop == FilteredShopFromPicker) Products.Add(product);
                 }
             }
+            switch (SortByFromPicker)
+            {
+                case "Name":
+                    Products = new ObservableCollection<Product>(Products.OrderBy(product => product.Name));
+                    break;
+                case "Quantity":
+                    Products = new ObservableCollection<Product>(Products.OrderBy(product => product.Quantity));
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void LoadProducts(string path)
@@ -211,7 +240,7 @@ namespace ShoppingList.ViewModels
                             Debug.WriteLine(destinedCategory.Products.Count);
                         }
                     }
-
+                    SortCategories();
                     foreach (Category category in Categories)
                     {
                         category.Products.CollectionChanged += Products_CollectionChanged;

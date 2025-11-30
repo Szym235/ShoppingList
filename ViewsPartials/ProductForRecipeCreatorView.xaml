@@ -2,7 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:ShoppingList.Models"
-             x:Class="ShoppingList.ViewsPartials.ProductForRecipeView"
+             x:Class="ShoppingList.ViewsPartials.ProductForRecipeCreatorView"
              x:DataType="models:Product"
              x:Name="this">
     <Border Stroke="LightGray"
@@ -19,6 +19,11 @@
             </Grid.ColumnDefinitions>
 
             <!--Label visible if product is optional -->
+            <CheckBox IsChecked="{Binding IsOptional}"
+                      Grid.Column="0"
+                      HorizontalOptions="Center"
+                      Margin="20, 0, 0, 0"
+                      Color="Orange"/>
             <Label Text="(Optional)" 
                    TextColor="DarkGray"
                    Grid.Column="0"
@@ -42,7 +47,7 @@
             </Label>
 
             <!--Product name -->
-            <Label Text="{Binding Name}" 
+            <Entry Text="{Binding Name}" 
                    TextColor="Black"
                    Grid.Column="1"
                    FontSize="20"
@@ -50,17 +55,17 @@
                    Margin="20"/>
 
             <!-- Quantity of product-->
-            <Label Text="{Binding Quantity}" 
+            <Entry  Text="{Binding Quantity}" 
                    TextColor="Black"
                    Grid.Column="2"
                    FontSize="20"
                    HorizontalOptions="End"
                    VerticalOptions="Center"
                    HeightRequest="20">
-            </Label>
+            </Entry>
 
             <!--Product unit -->
-            <Label Text="{Binding Unit}" 
+            <Entry Text="{Binding Unit}" 
                    TextColor="Black"
                    Grid.Column="3"
                    FontSize="20"
