@@ -56,8 +56,7 @@
                    Grid.Column="2"
                    FontSize="20"
                    HorizontalOptions="End"
-                   VerticalOptions="Center"
-                   HeightRequest="20">
+                   VerticalOptions="Center">
             </Label>
 
             <!--Product unit -->

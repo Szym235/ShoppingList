@@ -29,6 +29,8 @@ namespace ShoppingList.ViewModels
             RecipeForCreation = new Recipe("New Recipe", new ObservableCollection<Category>());
             Categories = AllProducts.Instance.Categories;
             Shops = AllProducts.Instance.Shops;
+            NewCategoryFromPicker = Categories[0];
+            NewShopFromPicker = Shops[0];
         }
 
         [RelayCommand]

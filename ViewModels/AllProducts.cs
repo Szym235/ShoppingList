@@ -56,8 +56,10 @@ namespace ShoppingList.ViewModels
             productsSaveFilePath = Path.Combine(FileSystem.AppDataDirectory, "ProductsSaveFile.xml");
             LoadProducts(productsSaveFilePath);
             NewShopFromPicker = Shops[0];
+            NewCategoryFromPicker = Categories[0];
             FilteredShopFromPicker = Shops[0];
             SortByFromPicker = SortOptions[0];
+            NewCategoryFromEntry = string.Empty;
         }
 
         private void Products_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -68,6 +70,7 @@ namespace ShoppingList.ViewModels
         private void Product_Changed(object? sender, PropertyChangedEventArgs e)
         {
             SaveProducts();
+            SortProductsInCategories();
         }
         partial void OnFilteredShopFromPickerChanged(string? oldValue, string newValue)
         {
@@ -104,7 +107,7 @@ namespace ShoppingList.ViewModels
         [RelayCommand]
         private void AddCategory()
         {
-            if(NewCategoryFromEntry == string.Empty)
+            if(NewCategoryFromEntry == string.Empty || !Category.CheckIfCategoryExistsInCollection(Categories, NewCategoryFromEntry))
             {
                 App.Current.MainPage.DisplayAlert("Wrong value", "Category name cannot be empty", "Ok");
                 return;
@@ -113,6 +116,7 @@ namespace ShoppingList.ViewModels
             Categories.Last().Products.CollectionChanged += Products_CollectionChanged;
             NewCategoryFromEntry = string.Empty;
             SortCategories();
+            SaveProducts();
         }
 
         private void SortCategories()
@@ -158,6 +162,7 @@ namespace ShoppingList.ViewModels
             }
             SaveProducts();
         }
+
 
         private XmlDocument CreateSaveFile()
         {
@@ -274,12 +279,27 @@ namespace ShoppingList.ViewModels
         [RelayCommand]
         private async Task ImportProducts()
         {
-            FileResult file = await FilePicker.Default.PickAsync();
-            if (file != null)
+            try
             {
-                LoadProducts(file.FullPath);
+                FileResult file = await FilePicker.Default.PickAsync();
+                if (file != null)
+                {
+                    LoadProducts(file.FullPath);
+                }
+                SaveProducts();
             }
-            SaveProducts();
+            catch
+            {
+                App.Current.MainPage.DisplayAlert("Import error", "Found error while importing products", "Ok");
+            }
+        }
+
+        private void SortProductsInCategories()
+        {
+            for(int i = 0; i < Categories.Count; i++)
+            {
+                Categories[i].Products = new ObservableCollection<Product>(Categories[i].Products.OrderBy(product => product.IsBought));
+            }
         }
     }
 }
