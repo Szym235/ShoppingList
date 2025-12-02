@@ -77,7 +77,7 @@ namespace ShoppingList.Models
         {
             double oldQuantity = Quantity;
             Quantity--;
-            if(Quantity < 0) Quantity = oldQuantity;
+            if(Quantity <= 0) Quantity = oldQuantity;
         }
     }
 }
