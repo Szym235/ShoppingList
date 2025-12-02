@@ -13,7 +13,8 @@
                               Margin="10, 0, 10, 0"/>
                     <Label Text="{Binding Name}"
                        FontSize="20"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center"
+                        TextColor="Black"/>
                 </HorizontalStackLayout>
 
                 <ListView ItemsSource="{Binding Products}" >

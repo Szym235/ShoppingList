@@ -161,6 +161,7 @@ namespace ShoppingList.ViewModels
                 if (isItNewCategory) destinedCategory.Products.CollectionChanged += Products_CollectionChanged;
             }
             SaveProducts();
+            UpdateProducts();
         }
 
 
